@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://github.com/teamookla/ookla-open-data/blob/develop/static/logo-ookla-for-good.svg?raw=true"
-</p>
-
 # Speedtest by Ookla Global Fixed and Mobile Network Performance Map Tiles
 
 ## Summary
