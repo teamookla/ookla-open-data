@@ -1317,7 +1317,7 @@ ggplot() +
         legend.position = "top")
 ```
 
-![County Broadband Statistics](/../tutorials/tutorials/static/county_map-1.png)<!-- -->
+![County Broadband Statistics](/../tutorials/static/usa_county_broadband_map.png)<!-- -->
 
 ``` r
 sessionInfo()
