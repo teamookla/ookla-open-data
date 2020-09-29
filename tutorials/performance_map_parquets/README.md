@@ -193,4 +193,4 @@ ggplot() +
        caption = "Quantile breaks")
 ```
 
-![](/../static/belltown_tiles_plot.svg)<!-- -->
+![](/../static/belltown_tiles_plot.svg?raw=true)<!-- -->
