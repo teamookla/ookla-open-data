@@ -1,0 +1,150 @@
+---
+title: "Analyzing download speeds in U.S. counties"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+In this tutorial I will talk about how to:
+
+* Download the Ookla open dataset
+* Geocode the tiles to U.S. counties
+* Make a table of the top and bottom 20 counties by download speed
+* And map the counties
+
+There are two main ways to join these tiles to another geographic dataset: quadkeys and spatial joins. This tutorial will use the spatial join approach. 
+
+```{r}
+library(tigris) # county boundaries
+library(tidyverse) # data cleaning
+library(sf) # spatial functions
+library(knitr)
+library(kableExtra)
+library(RColorBrewer)
+library(urbnmapr) # county basemap
+library(here)
+```
+
+
+## Download data
+
+First, download the data to a local directory 
+
+*Need to edit this with the public data*
+
+```{r download_tiles, eval = FALSE}
+# temp files
+temp <- tempfile()
+temp2 <- tempfile()
+# download the zip folder from s3 and save to temp 
+download.file("https://ookla-open-data.s3-us-west-2.amazonaws.com/shapefiles/performance/type%3Dfixed/year%3D2020/quarter%3D2/2020-04-01_performance_fixed_tiles.zip",temp)
+# unzip the contents in 'temp' and save unzipped content in 'temp2'
+unzip(zipfile = temp, exdir = temp2)
+# finds the filepath of the shapefile (.shp) file in the temp2 unzip folder
+# the $ at the end of ".shp$" ensures you are not also finding files such as .shp.xml 
+shp <-list.files(temp2, pattern = ".shp$",full.names=TRUE)
+
+#read the shapefile. Alternatively make an assignment, such as f<-sf::read_sf(your_SHP_file)
+tiles <- read_sf(shp)
+```
+
+## Get county boundaries
+
+Then, I'll load the U.S. county boundaries from the U.S. Census Bureau via `tigris`. These boundaries include D.C. and the territories.  
+
+```{r download_counties, eval = FALSE}
+us_counties <- tigris::counties() %>%
+  select(state_code = STATEFP, geoid = GEOID, name = NAME) %>% # only keep useful variables 
+  st_transform(st_crs(tiles)) # transform to the same CRS as the tiles
+```
+
+## Join tiles to counties
+
+Now I'll join the tiles to the counties. I use `left = FALSE` because I only want to include counties that have at least 1 tile. 
+
+```{r tiles_in_counties, eval = FALSE}
+tiles_in_counties <- st_join(us_counties, tiles, left = FALSE)
+```
+
+## Calculate statistics
+
+Once the datasets are joined, we are interested in summary statistics at the county level. Since we know the average download speed per tile, we could just do a simple average. To make it more accurate, I'll use a weighted mean, weighted by test count. This gives us the overall mean in the county if the data hadn't been aggregated to tiles first. I've also included weighted means for upload speed and latency here as well. 
+  
+```{r county_stats, eval = FALSE}
+county_stats <- tiles_in_counties %>%
+  st_set_geometry(NULL) %>%
+  group_by(state_code, geoid, name) %>%
+  summarise(mean_dl_mbps_wt = weighted.mean(avg_d_kbps, tests) / 1000,
+            mean_ul_mbps_wt = weighted.mean(avg_u_kbps, tests) / 1000,
+            mean_lat_ms_wt = weighted.mean(avg_lat_ms, tests),
+            tests = sum(tests)) %>%
+  ungroup() %>%
+  left_join(fips_codes %>% 
+              mutate(geoid = paste0(state_code, county_code)) %>% 
+              # get nicer county and state names
+              select(state, geoid, long_name = county, county), by = c("geoid")) 
+```
+
+```{r include = FALSE}
+county_stats <- read_csv("county_stats.csv")
+```
+
+## Make a table of the top 20 and bottom 20 counties
+
+Next we can make a summary table of just the best and worst counties. We'll require that counties have at least 50 tests so that the averages are more reliable. I use `kable()` here for simplicity, but you could use any of the R packages that help with tables. 
+
+```{r county_table}
+table_data <- county_stats %>%
+  filter(tests >= 50) %>%
+  mutate(rank = min_rank(-mean_dl_mbps_wt)) %>% # rank in descending order
+  dplyr::filter(rank <= 20 | rank >= n() - 19) %>%
+  mutate(`County` = paste0(long_name, ", ", state),
+         mean_dl_mbps_wt = round(mean_dl_mbps_wt, 2)) %>%
+  arrange(rank) %>%
+  select(`County`, `Average download speed (Mbps)` = mean_dl_mbps_wt, `Tests` = tests, `Rank` = rank)
+
+kable(table_data, format.args = list(big.mark = ","))
+
+```
+
+## And we can also make a map of these counties
+
+The table is good for a quick glance at overall patterns (what are the overall maxima and minima? where is the fastest speed?) but unless you're already familiar with these areas it can be hard to picture where they are on a map. To go along with the table we can produce a quick choropleth map that will help give a more visual representation.
+
+I like using the basemaps from the [Urban Institute](https://urbaninstitute.github.io/urbnmapr/articles/introducing-urbnmapr.html) because they have the non-lower-48 shifted over so they're easier to see on a map layout. Not great for geocoding, but excellent for visualization. 
+
+```{r basemap}
+basemap <- get_urbn_map(map = "territories_counties", sf = TRUE)
+
+state_borders <- get_urbn_map(map = "territories_states", sf = TRUE)
+```
+
+We can join our county statistics table to the basemap (remember, we already got rid of the geometry from that county statistics table). I'm also creating a categorical variable from the continuous download speed because people aren't great at reading continuous color schemes. People can read discrete legends much more easily, with 7 categories maximum (this can depend on the situation, though).
+
+```{r county_map, dpi=300, fig.width = 10}
+county_stats_sf <- basemap %>%
+  select(geoid = county_fips) %>%
+  left_join(county_stats, by = c("geoid")) %>%
+  mutate(mean_dl_mbps_wt = case_when(tests < 50 ~ NA_real_,
+                            TRUE ~ mean_dl_mbps_wt)) %>% # at least 50 tests
+  mutate(dl_cat = cut(mean_dl_mbps_wt, c(0, 25, 50, 100, 150, 200), ordered_result = TRUE))
+
+ggplot() +
+  geom_sf(data = county_stats_sf, aes(fill = dl_cat), color = "white", lwd = 0.1) +
+  geom_sf(data = state_borders, fill = NA, color = "gray20", lwd = 0.2) +
+  theme_void() +
+  scale_fill_manual(values = brewer.pal(n = 6, name = "BuPu"),  
+                    na.value = "gray80", 
+                    labels = c("0 to 25", "25.1 to 50", "50.1 to 100", "100.1 to 150", "150.1 to 200", "Insufficient data"), 
+                    name = "Mean download speed (Mbps)", 
+                    guide = guide_legend(direction = "horizontal", title.position = "top", nrow = 1, label.position = "bottom", keyheight = 0.5, keywidth = 5)) +
+  theme(text = element_text(family = "Lato", color = "gray25"),
+        legend.position = "top")
+```
+
+```{r session}
+sessionInfo()
+```
+
