@@ -88,7 +88,7 @@ ggplot() +
   theme_void()
 ```
 
-![](https://raw.githubusercontent.com/teamookla/ookla-open-data/tutorials-2/tutorials/img/belltown_box-1.png)<!-- -->
+![](img/belltown_box-1.png)<!-- -->
 
 Looks correct\!
 
@@ -205,4 +205,4 @@ ggplot() +
        caption = "Quantile breaks")
 ```
 
-![](https://raw.githubusercontent.com/teamookla/ookla-open-data/tutorials-2/tutorials/img/belltown_tiles-1.png)<!-- -->
+![](img/belltown_tiles-1.png)<!-- -->
