@@ -87,7 +87,9 @@ The data is also available in Apache Parquet format. The available fields are de
 
 ### Tutorials
 
-Link to tutorials
+[Using R to analyze download speeds in U.S. counties](tutorials/aggregate_by_county.md)
+
+[Using R to filter tiles by location with parquet](tutorials/filter_parquet_bounding_box.md)
 
 ## License
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
