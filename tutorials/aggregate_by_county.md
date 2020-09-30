@@ -1317,7 +1317,7 @@ ggplot() +
         legend.position = "top")
 ```
 
-![county map showing higher speeds in more urban areas on average](https://raw.githubusercontent.com/teamookla/ookla-open-data/tutorials-2/tutorials/img/county_map-1.png?token=ANNMKSBLL7MWJUSTMEJMA3S7PUHCU)<!-- -->
+![county map showing higher speeds in more urban areas on average](https://raw.githubusercontent.com/teamookla/ookla-open-data/tutorials-2/tutorials/img/county_map-1.png)<!-- -->
 
 ``` r
 sessionInfo()
