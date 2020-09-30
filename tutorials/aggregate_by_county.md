@@ -25,9 +25,8 @@ library(here)
 
 ## Download data
 
-First, download the data to a local directory
+First, download the data to a local directory using the link from s3. 
 
-*Need to edit this with the public data*
 
 ``` r
 # temp files
