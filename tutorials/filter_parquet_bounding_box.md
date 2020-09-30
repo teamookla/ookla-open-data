@@ -95,8 +95,8 @@ Looks correct\!
 ## Filter the Speedtest tiles
 
 The general idea of this function is *find tiles covered by bounding box
--\> convert to quadkey -\> [convert to
-quadkey](https://gist.github.com/dselivanov/77526fed90ca97a53a6d423e313708fb)*
+-\> [convert to
+quadkey](https://gist.github.com/dselivanov/77526fed90ca97a53a6d423e313708fb)* -\> filter quadkeys
 
 Quadkeys are unique identifiers for map tiles at different zoom levels–
 these tiles are all zoom level 16. They’re helpful for comparing
