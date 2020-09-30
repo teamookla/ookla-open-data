@@ -1,4 +1,4 @@
-Analyzing download speeds in U.S. counties
+Using R to analyze download speeds in U.S. counties
 ================
 
 In this tutorial I will talk about how to:

@@ -1,4 +1,4 @@
-Filtering tiles by location (with parquet)
+Using R to filter tiles by location with parquet
 ================
 
 ``` r
