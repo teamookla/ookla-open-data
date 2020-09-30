@@ -25,7 +25,7 @@ library(here)
 
 ## Download data
 
-First, download the data to a local directory using the link from s3. 
+First, download the data to a local directory using the link from s3.
 
 
 ``` r
@@ -40,7 +40,7 @@ unzip(zipfile = temp, exdir = temp2)
 # the $ at the end of ".shp$" ensures you are not also finding files such as .shp.xml
 shp <-list.files(temp2, pattern = ".shp$",full.names=TRUE)
 
-#read the shapefile. Alternatively make an assignment, such as f<-sf::read_sf(your_SHP_file)
+#read the shapefile
 tiles <- read_sf(shp)
 ```
 
