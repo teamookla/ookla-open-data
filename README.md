@@ -50,7 +50,7 @@ Data is subject to be reaggregated regularly in order to honor Data Subject Acce
 Data are provided in both Shapefile format as well as Apache Parquet, and can be accessed on Amazon Web Services (AWS) object storage service, S3, at the following paths:
 
 * `s3://ookla-open-data/parquet/performance/`
-* `s3://ookla-open-data/shp/performance/`
+* `s3://ookla-open-data/shapefiles/performance/`
 
 using the key names for the type, year, quarter, and data layer.
 
