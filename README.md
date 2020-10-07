@@ -1,5 +1,7 @@
 # Speedtest by Ookla Global Fixed and Mobile Network Performance Map Tiles
 
+![world map of Ookla open data](img/open-data-github-header.png)
+
 ## Summary
 This dataset provides global fixed broadband and mobile (cellular) network performance metrics in zoom level 16 web mercator tiles (approximately 610.8 meters by 610.8 meters at the equator). Data is provided in both Shapefile format as well as Apache Parquet with geometries represented in Well Known Text (WKT) projected in EPSG:4326. Download speed, upload speed, and latency are collected via the Speedtest by Ookla applications for Android and iOS and averaged for each tile. Measurements are filtered to results containing GPS-quality location accuracy.
 
@@ -54,7 +56,7 @@ Data are provided in both Shapefile format as well as Apache Parquet, and can be
 
 using the key names for the type, year, quarter, and data layer.
 
-For example, to access mobile tiles in the parquet format for the second quarter of the year 2020, one would use the bucket, `s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter=2/2020-04-01_performance_mobile_tiles.parquet`. 
+For example, to access mobile tiles in the parquet format for the second quarter of the year 2020, one would use the bucket, `s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter=2/2020-04-01_performance_mobile_tiles.parquet`.
 
 ### Shapefile
 
