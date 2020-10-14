@@ -87,6 +87,10 @@ These files serve the following purpose:
 
 The data is also available in Apache Parquet format. The available fields are described in the *Attributes* section. An additional field, `tiles` contains a [Well Known Text](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) (WKT) representation of the tile geometry. WKT is readable by many cloud tools with spatial extensions, such as [Athena](https://docs.aws.amazon.com/athena/latest/ug/geospatial-input-data-formats-supported-geometry-types.html) and [Redshift](https://docs.aws.amazon.com/redshift/latest/dg/ST_GeomFromText-function.html).
 
+### R Package
+
+[ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR) 
+
 ### Tutorials
 
 [Using R to analyze download speeds in U.S. counties](tutorials/aggregate_by_county.md)
