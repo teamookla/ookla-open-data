@@ -47,16 +47,7 @@ Layers are generated based on a quarter year of data (three months) and files wi
 
 Data is subject to be reaggregated regularly in order to honor Data Subject Access Requests (DSAR) as is applicable in certain jurisdictions under laws including but not limited to General Data Protection Regulation (GDPR), California Consumer Privacy Act (CCPA), and Lei Geral de Proteção de Dados (LGPD). Therefore, data accessed at different times may result in variation in the total number of tests, tiles, and resulting performance metrics.
 
-## Data Access and Formats
-
-Data are provided in both Shapefile format as well as Apache Parquet, and can be accessed on Amazon Web Services (AWS) object storage service, S3, at the following paths:
-
-* `s3://ookla-open-data/parquet/performance/`
-* `s3://ookla-open-data/shapefiles/performance/`
-
-using the key names for the type, year, quarter, and data layer.
-
-For example, to access mobile tiles in the parquet format for the second quarter of the year 2020, one would use the bucket, `s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter=2/2020-04-01_performance_mobile_tiles.parquet`.
+## Data Formats
 
 ### Shapefile
 
@@ -87,11 +78,50 @@ These files serve the following purpose:
 
 The data is also available in Apache Parquet format. The available fields are described in the *Attributes* section. An additional field, `tiles` contains a [Well Known Text](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) (WKT) representation of the tile geometry. WKT is readable by many cloud tools with spatial extensions, such as [Athena](https://docs.aws.amazon.com/athena/latest/ug/geospatial-input-data-formats-supported-geometry-types.html) and [Redshift](https://docs.aws.amazon.com/redshift/latest/dg/ST_GeomFromText-function.html).
 
+## Data Access
+
+### Access via S3
+
+The performance datasets can be accessed on Amazon Web Services (AWS) object storage service, S3, at the s3://ookla-open-data bucket, organized by the key names:
+
+1. file format (shapefiles or parquet)
+2. service type (fixed or mobile)
+3. year (2020)
+4. quarter (1 corresponds to the period starting 2020-01-01)
+
+Using the key names for the file format, type, year, quarter, and data layer, one can specify the desired dataset. For example, to access all of the files for fixed and mobile service types for the first quarter of the year 2020, one would use the following buckets:
+
+Shapefiles:
+
+* `s3://ookla-open-data/shapefiles/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.zip`
+* `s3://ookla-open-data/shapefiles/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.zip`
+
+parquet files:
+
+* `s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.parquet`
+* `s3://ookla-open-data/parquet/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.parquet`
+
+### Download via URL
+
+Files can also be downloaded directly by clicking on the following URLs:
+
+Shapefiles:
+
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.zip
+
+parquet files:
+
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.parquet
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.parquet
+
+using the key names for the file format, type, year, quarter, and data layer, as above.
+
 ### R Package
 
-[ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR) 
+If using R, the [ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR) package provides functions for accessing and working with the datasets.
 
-### Tutorials
+## Tutorials
 
 [Using R to analyze download speeds in U.S. counties](tutorials/aggregate_by_county.md)
 
