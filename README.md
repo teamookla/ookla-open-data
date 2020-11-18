@@ -49,14 +49,41 @@ Data is subject to be reaggregated regularly in order to honor Data Subject Acce
 
 ## Data Access and Formats
 
-Data are provided in both Shapefile format as well as Apache Parquet, and can be accessed on Amazon Web Services (AWS) object storage service, S3, at the following paths:
+Data are provided in both Shapefile format as well as Apache Parquet.
 
-* `s3://ookla-open-data/parquet/performance/`
-* `s3://ookla-open-data/shapefiles/performance/`
+### Access via S3
+
+They can be accessed on Amazon Web Services (AWS) object storage service, S3, at the following paths:
+
+Shapefiles:
+
+* `s3://ookla-open-data/shapefiles/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.zip`
+* `s3://ookla-open-data/shapefiles/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.zip`
+
+parquet files:
+
+* `s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.parquet`
+* `s3://ookla-open-data/parquet/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.parquet`
 
 using the key names for the type, year, quarter, and data layer.
 
 For example, to access mobile tiles in the parquet format for the second quarter of the year 2020, one would use the bucket, `s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter=2/2020-04-01_performance_mobile_tiles.parquet`.
+
+### Download via URL
+
+Files can also be downloaded directly by clicking on the following URLs:
+
+Shapefiles:
+
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.zip
+
+parquet files:
+
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.parquet
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.parquet
+
+using the key names for the type, year, quarter, and data layer, as above.
 
 ### Shapefile
 
@@ -89,7 +116,7 @@ The data is also available in Apache Parquet format. The available fields are de
 
 ### R Package
 
-[ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR) 
+[ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR)
 
 ### Tutorials
 
