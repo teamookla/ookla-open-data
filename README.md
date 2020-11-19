@@ -139,7 +139,6 @@ aws s3 cp s3://ookla-open-data/${FORMAT}/performance/type=${TYPE}/year=${YYYY}/q
 --no-sign-request
 ```
 
-In this example, we pass the `--recursive` option to the AWS S3 copy command to download the compressed shapefiles located at the S3 URI defined by service type, year, and quarter. The filename corresponds to the start date of the quarter and the network service type: `2020-01-01_performance_fixed_tiles.zip`.
 
 To download the 2020 Q3 mobile and fixed time series datasets, we can also specify the full S3 URI to download the objects:
 
