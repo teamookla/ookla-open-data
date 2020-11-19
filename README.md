@@ -125,7 +125,7 @@ Apache Parquet:
 
 S3 objects can also be downloaded via the AWS CLI. See these instructions for [installing AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).  
 
-Based on the object key names described above, the following bash script downloads compressed shapefiles for fixed performance tiles aggregated over the first calendar year quarter of 2020 using the [aws s3 cp](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html) command:
+Using the object keys described above, the following bash script downloads a shapefile (`2020-01-01_performance_fixed_tiles.zip`) for fixed performance tiles aggregated over Q1 2020 using [aws s3 cp](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html).
 
 ```bash
 #!/usr/bin/env bash
