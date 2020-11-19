@@ -153,7 +153,6 @@ aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter
 aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2020/quarter=3/2020-07-01_performance_fixed_tiles.parquet --no-sign-request
 ```
 
-AWS accounts within an organization may have restrictions on accessing external resources via CLI. We've therefore included the  `--no-sign-request` flag in the examples above, which allows us to copy S3 objects locally using public requests.
 
 ### R Package
 
