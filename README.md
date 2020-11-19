@@ -87,7 +87,7 @@ The performance datasets are available via [AWS S3](https://aws.amazon.com/s3/) 
 1. file format (`shapefiles` or `parquet`)
 2. service type (`fixed` or `mobile`)
 3. year (`2020`)
-4. quarter (for example, `1` corresponds to the period starting `2020-01-01`)
+4. quarter (for example, `1` corresponds to the Q1 period starting `2020-01-01`)
 
 Individual downloads for fixed or mobile network performance aggregates (map tiles) for a given quarter can be located based on the following object key naming pattern:
 
