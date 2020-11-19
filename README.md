@@ -111,17 +111,15 @@ Using the key names for the file format, type, year, quarter, and data layer, on
 
 Files can also be downloaded directly by clicking on the following URLs:
 
-Shapefiles:
+Esri Shapefiles:
 
 * https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.zip
 * https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.zip
 
-parquet files:
+Apache Parquet:
 
 * https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.parquet
 * https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.parquet
-
-using the key names for the file format, type, year, quarter, and data layer, as above.
 
 ### Download via CLI
 
