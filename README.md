@@ -82,7 +82,7 @@ The data is also available in Apache Parquet format. The available fields are de
 
 ### Access via S3
 
-The performance datasets are available via Amazon Simple Storage Service (Amazon S3) at the `s3://ookla-open-data` bucket, where individual Parquets and compressed Shapefiles are organized by
+The performance datasets are available via [AWS S3](https://aws.amazon.com/s3/) at the `s3://ookla-open-data` bucket, where individual [Parquet](https://parquet.apache.org/) time series and compressed Shapefiles are organized by
 
 1. file format (`shapefiles` or `parquet`)
 2. service type (`fixed` or `mobile`)
