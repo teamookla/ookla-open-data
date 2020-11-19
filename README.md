@@ -82,14 +82,18 @@ The data is also available in Apache Parquet format. The available fields are de
 
 ### Access via S3
 
-The performance datasets can be accessed on Amazon Web Services (AWS) object storage service, S3, at the s3://ookla-open-data bucket, organized by the key names:
+The performance datasets are available via Amazon Simple Storage Service (Amazon S3) at the `s3://ookla-open-data` bucket, where individual Parquets and compressed Shapefiles are organized by
 
-1. file format (shapefiles or parquet)
-2. service type (fixed or mobile)
-3. year (2020)
-4. quarter (1 corresponds to the period starting 2020-01-01)
+1. file format (`shapefiles` or `parquet`)
+2. service type (`fixed` or `mobile`)
+3. year (`2020`)
+4. quarter (for example, `1` corresponds to the period starting `2020-01-01`)
 
-Using the key names for the file format, type, year, quarter, and data layer, one can specify the desired dataset. For example, to access all of the files for fixed and mobile service types for the first quarter of the year 2020, one would use the following buckets:
+Individual downloads for fixed or mobile network performance aggregates (map tiles) for a given quarter can be located based on the following object key naming pattern:
+
+s3://ookla-open-data/**FORMAT**/performance/type=**TYPE**/year=**YYYY**/quarter=**Q**/**FILENAME**
+
+For example, to access all of the files for fixed and mobile service types for the first quarter of the year 2020, one would use the following S3 URIs:
 
 Shapefiles:
 
@@ -100,6 +104,8 @@ parquet files:
 
 * `s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.parquet`
 * `s3://ookla-open-data/parquet/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.parquet`
+
+Using the key names for the file format, type, year, quarter, and data layer, one can specify the desired dataset. 
 
 ### Download via URL
 
@@ -116,6 +122,40 @@ parquet files:
 * https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.parquet
 
 using the key names for the file format, type, year, quarter, and data layer, as above.
+
+### Download via CLI
+
+S3 objects can also be downloaded via the AWS CLI. See these instructions for [installing AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).  
+
+Based on the object key names described above, the following bash script downloads compressed shapefiles for fixed performance tiles aggregated over the first calendar year quarter of 2020 using the [aws s3 cp](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html) command:
+
+```bash
+#!/usr/bin/env bash
+export FORMAT='shapefiles' # (shapefiles|parquet)
+export TYPE='fixed'        # (fixed|mobile)
+export YYYY='2020'         # 2020
+export Q='1'               # 1,2,3 (to date)
+
+aws s3 cp s3://ookla-open-data/${FORMAT}/performance/type=${TYPE}/year=${YYYY}/quarter=${Q}/ . \
+--recursive \
+--no-sign-request
+```
+
+In this example, we pass the `--recursive` option to the AWS S3 copy command to download the compressed shapefiles located at the S3 URI defined by service type, year, and quarter. The filename corresponds to the start date of the quarter and the network service type: `2020-01-01_performance_fixed_tiles.zip`.
+
+To download the mobile and fixed datasets in parquet format for 2020 Q3, we can also specify the full S3 URI path to download the objects:
+
+``` bash
+#!/usr/bin/env bash
+
+# Mobile 2020 Q3
+aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter=3/2020-07-01_performance_mobile_tiles.parquet --no-sign-request
+
+# Fixed 2020 Q3
+aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2020/quarter=3/2020-07-01_performance_fixed_tiles.parquet --no-sign-request
+```
+
+AWS accounts within an organization may have restrictions on accessing external resources via CLI. We've therefore included the  `--no-sign-request` flag in the examples above, which allows us to copy S3 objects locally using public requests.
 
 ### R Package
 
