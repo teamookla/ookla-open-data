@@ -105,7 +105,6 @@ parquet files:
 * `s3://ookla-open-data/parquet/performance/type=mobile/year=2020/quarter=1/2020-01-01_performance_mobile_tiles.parquet`
 * `s3://ookla-open-data/parquet/performance/type=fixed/year=2020/quarter=1/2020-01-01_performance_fixed_tiles.parquet`
 
-Using the key names for the file format, type, year, quarter, and data layer, one can specify the desired dataset. 
 
 ### Download via URL
 
