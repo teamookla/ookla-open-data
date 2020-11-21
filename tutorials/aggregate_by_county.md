@@ -1,4 +1,4 @@
-Using R to analyze download speeds in U.S. counties
+Analyzing download speeds in U.S. counties
 ================
 
 In this tutorial I will talk about how to:
@@ -25,22 +25,23 @@ library(here)
 
 ## Download data
 
-First, download the data to a local directory using the link from s3.
+First, download the data to a local directory
 
+*Need to edit this with the public data*
 
 ``` r
 # temp files
 temp <- tempfile()
 temp2 <- tempfile()
-# download the zip folder from s3 and save to temp
+# download the zip folder from s3 and save to temp 
 download.file("https://ookla-open-data.s3-us-west-2.amazonaws.com/shapefiles/performance/type%3Dfixed/year%3D2020/quarter%3D2/2020-04-01_performance_fixed_tiles.zip",temp)
 # unzip the contents in 'temp' and save unzipped content in 'temp2'
 unzip(zipfile = temp, exdir = temp2)
 # finds the filepath of the shapefile (.shp) file in the temp2 unzip folder
-# the $ at the end of ".shp$" ensures you are not also finding files such as .shp.xml
+# the $ at the end of ".shp$" ensures you are not also finding files such as .shp.xml 
 shp <-list.files(temp2, pattern = ".shp$",full.names=TRUE)
 
-#read the shapefile
+#read the shapefile. Alternatively make an assignment, such as f<-sf::read_sf(your_SHP_file)
 tiles <- read_sf(shp)
 ```
 
@@ -51,7 +52,7 @@ via `tigris`. These boundaries include D.C. and the territories.
 
 ``` r
 us_counties <- tigris::counties() %>%
-  select(state_code = STATEFP, geoid = GEOID, name = NAME) %>% # only keep useful variables
+  select(state_code = STATEFP, geoid = GEOID, name = NAME) %>% # only keep useful variables 
   st_transform(st_crs(tiles)) # transform to the same CRS as the tiles
 ```
 
@@ -82,10 +83,10 @@ county_stats <- tiles_in_counties %>%
             mean_lat_ms_wt = weighted.mean(avg_lat_ms, tests),
             tests = sum(tests)) %>%
   ungroup() %>%
-  left_join(fips_codes %>%
-              mutate(geoid = paste0(state_code, county_code)) %>%
+  left_join(fips_codes %>% 
+              mutate(geoid = paste0(state_code, county_code)) %>% 
               # get nicer county and state names
-              select(state, geoid, long_name = county, county), by = c("geoid"))
+              select(state, geoid, long_name = county, county), by = c("geoid")) 
 ```
 
 ## Make a table of the top 20 and bottom 20 counties
@@ -1307,16 +1308,16 @@ ggplot() +
   geom_sf(data = county_stats_sf, aes(fill = dl_cat), color = "white", lwd = 0.1) +
   geom_sf(data = state_borders, fill = NA, color = "gray20", lwd = 0.2) +
   theme_void() +
-  scale_fill_manual(values = brewer.pal(n = 6, name = "BuPu"),
-                    na.value = "gray80",
-                    labels = c("0 to 25", "25.1 to 50", "50.1 to 100", "100.1 to 150", "150.1 to 200", "Insufficient data"),
-                    name = "Mean download speed (Mbps)",
+  scale_fill_manual(values = brewer.pal(n = 6, name = "BuPu"),  
+                    na.value = "gray80", 
+                    labels = c("0 to 25", "25.1 to 50", "50.1 to 100", "100.1 to 150", "150.1 to 200", "Insufficient data"), 
+                    name = "Mean download speed (Mbps)", 
                     guide = guide_legend(direction = "horizontal", title.position = "top", nrow = 1, label.position = "bottom", keyheight = 0.5, keywidth = 5)) +
-  theme(text = element_text(family = "Lato", color = "gray25"),
+  theme(text = element_text(color = "gray25"),
         legend.position = "top")
 ```
 
-![county map showing higher speeds in more urban areas on average](img/county_map-1.png)<!-- -->
+![](aggregate_by_county_files/figure-gfm/county_map-1.png)<!-- -->
 
 ``` r
 sessionInfo()
@@ -1325,40 +1326,40 @@ sessionInfo()
     ## R version 3.6.1 (2019-07-05)
     ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
     ## Running under: macOS Mojave 10.14.6
-    ##
+    ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
     ## LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
-    ##
+    ## 
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-    ##
+    ## 
     ## attached base packages:
-    ## [1] stats     graphics  grDevices utils     datasets  methods   base
-    ##
+    ## [1] stats     graphics  grDevices utils     datasets  methods   base     
+    ## 
     ## other attached packages:
-    ##  [1] here_0.1            urbnmapr_0.0.0.9002 RColorBrewer_1.1-2
-    ##  [4] kableExtra_1.1.0    knitr_1.29          sf_0.8-0
-    ##  [7] forcats_0.5.0       stringr_1.4.0       dplyr_1.0.0
-    ## [10] purrr_0.3.4         readr_1.3.1         tidyr_1.1.0
-    ## [13] tibble_3.0.1        ggplot2_3.3.2       tidyverse_1.3.0
-    ## [16] tigris_1.0
-    ##
+    ##  [1] here_0.1            urbnmapr_0.0.0.9002 RColorBrewer_1.1-2 
+    ##  [4] kableExtra_1.1.0    knitr_1.29          sf_0.8-0           
+    ##  [7] forcats_0.5.0       stringr_1.4.0       dplyr_1.0.2        
+    ## [10] purrr_0.3.4         readr_1.3.1         tidyr_1.1.0        
+    ## [13] tibble_3.0.1        ggplot2_3.3.2       tidyverse_1.3.0    
+    ## [16] tigris_1.0         
+    ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] httr_1.4.2         jsonlite_1.7.0     viridisLite_0.3.0  modelr_0.1.8
-    ##  [5] assertthat_0.2.1   sp_1.3-2           highr_0.8          blob_1.2.1
-    ##  [9] cellranger_1.1.0   yaml_2.2.1         pillar_1.4.4       backports_1.1.8
-    ## [13] lattice_0.20-38    glue_1.4.1         uuid_0.1-2         digest_0.6.25
-    ## [17] rvest_0.3.5        colorspace_1.4-1   htmltools_0.5.0    pkgconfig_2.0.3
-    ## [21] broom_0.5.6        haven_2.3.1        scales_1.1.1       webshot_0.5.1
-    ## [25] farver_2.0.3       generics_0.0.2     ellipsis_0.3.1     withr_2.2.0
-    ## [29] cli_2.0.2          magrittr_1.5       crayon_1.3.4       readxl_1.3.1
-    ## [33] maptools_0.9-8     evaluate_0.14      fs_1.4.2           fansi_0.4.1
-    ## [37] nlme_3.1-140       xml2_1.3.2         foreign_0.8-71     class_7.3-15
-    ## [41] tools_3.6.1        hms_0.5.3          lifecycle_0.2.0    munsell_0.5.0
-    ## [45] reprex_0.3.0       compiler_3.6.1     e1071_1.7-3        rlang_0.4.7
-    ## [49] classInt_0.4-2     units_0.6-5        grid_3.6.1         rstudioapi_0.11
-    ## [53] rappdirs_0.3.1     rmarkdown_2.3      gtable_0.3.0       DBI_1.1.0
-    ## [57] R6_2.4.1           lubridate_1.7.9    rgdal_1.4-6        rprojroot_1.3-2
-    ## [61] KernSmooth_2.23-15 stringi_1.4.6      Rcpp_1.0.3         vctrs_0.3.1
+    ##  [1] httr_1.4.2         jsonlite_1.7.0     viridisLite_0.3.0  modelr_0.1.8      
+    ##  [5] assertthat_0.2.1   sp_1.3-2           highr_0.8          blob_1.2.1        
+    ##  [9] cellranger_1.1.0   yaml_2.2.1         pillar_1.4.4       backports_1.1.8   
+    ## [13] lattice_0.20-38    glue_1.4.1         uuid_0.1-2         digest_0.6.25     
+    ## [17] rvest_0.3.5        colorspace_1.4-1   htmltools_0.5.0    pkgconfig_2.0.3   
+    ## [21] broom_0.5.6        haven_2.3.1        scales_1.1.1       webshot_0.5.1     
+    ## [25] farver_2.0.3       generics_0.0.2     ellipsis_0.3.1     withr_2.2.0       
+    ## [29] cli_2.0.2          magrittr_1.5       crayon_1.3.4       readxl_1.3.1      
+    ## [33] maptools_0.9-8     evaluate_0.14      fs_1.4.2           fansi_0.4.1       
+    ## [37] nlme_3.1-140       xml2_1.3.2         foreign_0.8-71     class_7.3-15      
+    ## [41] tools_3.6.1        hms_0.5.3          lifecycle_0.2.0    munsell_0.5.0     
+    ## [45] reprex_0.3.0       compiler_3.6.1     e1071_1.7-3        rlang_0.4.7       
+    ## [49] classInt_0.4-2     units_0.6-5        grid_3.6.1         rstudioapi_0.11   
+    ## [53] rappdirs_0.3.1     rmarkdown_2.3      gtable_0.3.0       DBI_1.1.0         
+    ## [57] R6_2.4.1           lubridate_1.7.9    rgdal_1.4-6        rprojroot_1.3-2   
+    ## [61] KernSmooth_2.23-15 stringi_1.4.6      Rcpp_1.0.3         vctrs_0.3.4       
     ## [65] dbplyr_1.4.4       tidyselect_1.1.0   xfun_0.15
