@@ -1,2 +1,3 @@
 *.Rmd
 *.csv
+.Rproj.user
