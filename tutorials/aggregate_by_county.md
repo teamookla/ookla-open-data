@@ -25,7 +25,7 @@ library(usethis) # download data
 
 ## Download data
 
-First, download the data to a local directory
+First, download the data to a local directory by uncommenting that line below
 
 ``` r
 # download the zip folder from s3 and save to working directory
