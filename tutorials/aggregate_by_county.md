@@ -1286,7 +1286,7 @@ county_stats_sf <- ky_counties %>%
   mutate(dl_cat = cut(mean_dl_mbps_wt, c(0, 25, 50, 100, 150, 200), ordered_result = TRUE))
 
 ggplot() +
-  geom_sf(data = county_stats_sf, aes(fill = dl_cat), color = "white", lwd = 0.1) +
+  geom_sf(data = county_stats_sf, aes(fill = dl_cat), color = "black", lwd = 0.1) +
   theme_void() +
   scale_fill_manual(values = brewer.pal(n = 6, name = "BuPu"),  
                     na.value = "gray80", 
