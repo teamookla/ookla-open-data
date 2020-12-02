@@ -160,6 +160,8 @@ If using R, the [ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR) pa
 
 [Using R to analyze download speeds in Kentucky counties](tutorials/aggregate_by_county.md)
 
+[Using Python to analyze download speeds in Kentucky counties](tutorials/aggregate_by_county_py.ipynb)
+
 [Using R to filter tiles by location with parquet](tutorials/filter_parquet_bounding_box.md)
 
 ## License
