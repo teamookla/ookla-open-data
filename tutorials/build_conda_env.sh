@@ -1,5 +1,5 @@
 #!/bin/bash
-​
+​set -e
 conda create -n ookla-open-data -y
 conda activate ookla-open-data
 ​
