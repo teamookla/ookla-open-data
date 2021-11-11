@@ -17,6 +17,9 @@ Hundreds of millions of [Speedtests](https://www.speedtest.net/) are taken on th
 
 For the purposes of these layers, a zoom level of 16 (z=16) is used for the tiling. This equates to a tile that is approximately 610.8 meters by 610.8 meters at the equator (18 arcsecond blocks). The geometry of each tile is represented in [WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System) (EPSG:4326) in the `tile` field.
 
+#### Update Cadence
+
+The tile aggregates start in Q1 2019 and go through the most recent quarter. They will be updated shortly after the conclusion of the quarter.
 
 #### Tile Attributes
 Each tile contains the following adjoining attributes:
