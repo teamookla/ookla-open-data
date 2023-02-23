@@ -24,14 +24,16 @@ The tile aggregates start in Q1 2019 and go through the most recent quarter (Q3 
 #### Tile Attributes
 Each tile contains the following adjoining attributes:
 
-| Field Name   | Type        | Description                                                                                        |
-|--------------|-------------|----------------------------------------------------------------------------------------------------|
-| `avg_d_kbps` | Integer     | The average download speed of all tests performed in the tile, represented in kilobits per second. |
-| `avg_u_kbps` | Integer     | The average upload speed of all tests performed in the tile, represented in kilobits per second.   |
-| `avg_lat_ms` | Integer     | The average latency of all tests performed in the tile, represented in milliseconds                |
-| `tests`      | Integer     | The number of tests taken in the tile.                                                             |
-| `devices`    | Integer     | The number of unique devices contributing tests in the tile.                                       |
-| `quadkey`    | Text        | The quadkey representing the tile.                                                                 |
+| Field Name        | Type        | Description                                                                                                                             | Notes                                                                                                                                                                              |
+|-------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `avg_d_kbps`      | Integer     | The average download speed of all tests performed in the tile, represented in kilobits per second.                                      |                                                                                                                                                                                    |
+| `avg_u_kbps`      | Integer     | The average upload speed of all tests performed in the tile, represented in kilobits per second.                                        |                                                                                                                                                                                    |
+| `avg_lat_ms`      | Integer     | The average latency of all tests performed in the tile, represented in milliseconds                                                     |                                                                                                                                                                                    |
+| `avg_lat_down_ms` | Integer     | The average latency under load of all tests performed in the tile as measured during the download phase of the test. Represented in ms. | Parquet-only. Added 2023-02-23 beginning in Q4 2022 dataset. This column is sparsely populated-- some rows will have a null value as not all versions of Speedtest can perform this measurement. |
+| `avg_lat_up_ms`   | Integer     | The average latency under load of all tests performed in the tile as measured during the upload phase of the test. Represented in ms.   | Parquet-only. Added 2023-02-23 beginning in Q4 2022 dataset. This column is sparsely populated-- some rows will have a null value as not all versions of Speedtest can perform this measurement. |
+| `tests`           | Integer     | The number of tests taken in the tile.                                                                                                  |                                                                                                                                                                                    |
+| `devices`         | Integer     | The number of unique devices contributing tests in the tile.                                                                            |                                                                                                                                                                                    |
+| `quadkey`         | Text        | The quadkey representing the tile.                                                                                                      |                                                                                                                                                                                    |
 
 
 #### Quadkeys
@@ -135,7 +137,6 @@ export FORMAT='shapefiles' # (shapefiles|parquet)
 export TYPE='fixed'        # (fixed|mobile)
 export YYYY='2020'         # 2019,2020,2021,2022
 export Q='1'               # 1,2,3,4 (to date)
-
 aws s3 cp s3://ookla-open-data/${FORMAT}/performance/type=${TYPE}/year=${YYYY}/quarter=${Q}/ . \
 --recursive \
 --no-sign-request
@@ -146,10 +147,8 @@ To download the 2022 Q3 mobile and fixed time series datasets, we can also speci
 
 ``` bash
 #!/usr/bin/env bash
-
 # Mobile 2022 Q3
 aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2022/quarter=3/2020-07-01_performance_mobile_tiles.parquet --no-sign-request
-
 # Fixed 2022 Q3
 aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2022/quarter=3/2022-07-01_performance_fixed_tiles.parquet --no-sign-request
 ```
@@ -169,3 +168,7 @@ If using R, the [ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR) pa
 
 ## License
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+## Change Log
+
+* **2023-02-23** Loaded latency values added as `avg_lat_down_ms` and `avg_lat_up_ms`. [Loaded latency](https://www.ookla.com/articles/introducing-loaded-latency#:~:text=The%20loaded%20latency%20test%20measures,it%20is%20not%20in%20use.) measures how network load impacts network responsiveness, or latency. These values are only available in Parquet format.
