@@ -32,6 +32,8 @@ Each tile contains the following adjoining attributes:
 | `tests`      | Integer     | The number of tests taken in the tile.                                                             |
 | `devices`    | Integer     | The number of unique devices contributing tests in the tile.                                       |
 | `quadkey`    | Text        | The quadkey representing the tile.                                                                 |
+| `tile_x`	   | Numeric	 | X coordinate of the tile's centroid.																  |
+| `tile_y`     | Numeric     | Y coordinate of the tile's centroid.                                                               |
 
 
 #### Quadkeys
