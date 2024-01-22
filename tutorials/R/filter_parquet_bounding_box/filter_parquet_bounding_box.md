@@ -88,7 +88,7 @@ ggplot() +
   theme_void()
 ```
 
-![](img/belltown_box-1.png)<!-- -->
+![](images/belltown_box-1.png)<!-- -->
 
 Looks correct\!
 
@@ -205,4 +205,4 @@ ggplot() +
        caption = "Quantile breaks")
 ```
 
-![](img/belltown_tiles-1.png)<!-- -->
+![](images/belltown_tiles-1.png)<!-- -->

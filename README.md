@@ -19,7 +19,7 @@ For the purposes of these layers, a zoom level of 16 (z=16) is used for the tili
 
 #### Update Cadence
 
-The tile aggregates start in Q1 2019 and go through the most recently completed quarter (Q3 2023). They will be updated shortly after the conclusion of the quarter.
+The tile aggregates start in Q1 2019 and go through the most recently completed quarter (Q4 2023). They will be updated shortly after the conclusion of the quarter.
 
 #### Tile Attributes
 Each tile contains the following adjoining attributes:
@@ -104,13 +104,13 @@ For example, to access all of the files for fixed and mobile service types for t
 
 Shapefiles:
 
-* `s3://ookla-open-data/shapefiles/performance/type=mobile/year=2023/quarter=3/2023-07-01_performance_mobile_tiles.zip`
-* `s3://ookla-open-data/shapefiles/performance/type=fixed/year=2023/quarter=3/2023-07-01_performance_fixed_tiles.zip`
+* `s3://ookla-open-data/shapefiles/performance/type=mobile/year=2023/quarter=4/2023-10-01_performance_mobile_tiles.zip`
+* `s3://ookla-open-data/shapefiles/performance/type=fixed/year=2023/quarter=4/2023-10-01_performance_fixed_tiles.zip`
 
 parquet files:
 
-* `s3://ookla-open-data/parquet/performance/type=mobile/year=2023/quarter=3/2023-07-01_performance_mobile_tiles.parquet`
-* `s3://ookla-open-data/parquet/performance/type=fixed/year=2023/quarter=3/2023-07-01_performance_fixed_tiles.parquet`
+* `s3://ookla-open-data/parquet/performance/type=mobile/year=2023/quarter=4/2023-10-01_performance_mobile_tiles.parquet`
+* `s3://ookla-open-data/parquet/performance/type=fixed/year=2023/quarter=4/2023-10-01_performance_fixed_tiles.parquet`
 
 
 ### Download via URL
@@ -119,40 +119,40 @@ Files can also be downloaded directly by clicking on the following URLs:
 
 Esri Shapefiles:
 
-* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2023/quarter=3/2023-07-01_performance_mobile_tiles.zip
-* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2023/quarter=3/2023-07-01_performance_fixed_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2023/quarter=4/2023-10-01_performance_mobile_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2023/quarter=4/2023-10-01_performance_fixed_tiles.zip
 
 Apache Parquet:
 
-* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=mobile/year=2023/quarter=3/2023-07-01_performance_mobile_tiles.parquet
-* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2023/quarter=3/2023-07-01_performance_fixed_tiles.parquet
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=mobile/year=2023/quarter=4/2023-10-01_performance_mobile_tiles.parquet
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2023/quarter=4/2023-10-01_performance_fixed_tiles.parquet
 
 ### Download via CLI
 
 S3 objects can also be downloaded via the AWS CLI. See these instructions for [installing AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).  
 
-Using the object keys described above, the following bash script downloads a shapefile (`2023-07-01_performance_fixed_tiles.zip`) for fixed performance tiles aggregated over Q3 2023 using [aws s3 cp](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html).
+Using the object keys described above, the following bash script downloads a shapefile (`2023-10-01_performance_fixed_tiles.zip`) for fixed performance tiles aggregated over Q4 2023 using [aws s3 cp](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html).
 
 ```bash
 #!/usr/bin/env bash
 export FORMAT='shapefiles' # (shapefiles|parquet)
 export TYPE='fixed'        # (fixed|mobile)
 export YYYY='2023'         # 2019,2020,2021,2022,2023
-export Q='3'               # 1,2,3,4 (to date)
+export Q='4'               # 1,2,3,4 (to date)
 aws s3 cp s3://ookla-open-data/${FORMAT}/performance/type=${TYPE}/year=${YYYY}/quarter=${Q}/ . \
 --recursive \
 --no-sign-request
 ```
 
 
-To download the 2023 Q3 mobile and fixed time series datasets, we can also specify the full S3 URI to download the objects:
+To download the 2023 Q4 mobile and fixed time series datasets, we can also specify the full S3 URI to download the objects:
 
 ``` bash
 #!/usr/bin/env bash
-# Mobile 2023 Q3
-aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2023/quarter=3/2023-07-01_performance_mobile_tiles.parquet --no-sign-request
-# Fixed 2023 Q3
-aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2023/quarter=3/2023-07-01_performance_fixed_tiles.parquet --no-sign-request
+# Mobile 2023 Q4
+aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2023/quarter=4/2023-10-01_performance_mobile_tiles.parquet --no-sign-request
+# Fixed 2023 Q4
+aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2023/quarter=4/2023-10-01_performance_fixed_tiles.parquet --no-sign-request
 ```
 
 
@@ -162,11 +162,15 @@ If using R, the [ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR) pa
 
 ## Tutorials
 
-[Using R to analyze download speeds in Kentucky counties](tutorials/aggregate_by_county.md)
+[Using Python to analyze download speeds in Kentucky counties](tutorials/python/aggregate_by_county/aggregate_by_county_py.ipynb)
 
-[Using Python to analyze download speeds in Kentucky counties](tutorials/aggregate_by_county_py.ipynb)
+[Using R to create your own maps with Ookla Open Datasets](https://www.ookla.com/articles/best-ookla-open-data-projects-2021)
 
-[Using R to filter tiles by location with parquet](tutorials/filter_parquet_bounding_box.md)
+[Using R to analyze download speeds in Kentucky counties](tutorials/R/aggregate_by_county/aggregate_by_county.md)
+
+[Using R to filter tiles by location with parquet](tutorials/R/filter_parquet_bounding_box/filter_parquet_bounding_box.md)
+
+[Using R to filter tiles by centroids with parquet](https://www.ookla.com/articles/ookla-for-good-centroid-coordinates)
 
 ## License
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
