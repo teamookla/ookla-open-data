@@ -1312,7 +1312,7 @@ ggplot() +
         legend.position = "top")
 ```
 
-![](img/county_map-1.png)<!-- -->
+![](images/county_map-1.png)<!-- -->
 
 ``` r
 sessionInfo()
