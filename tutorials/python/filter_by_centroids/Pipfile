@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+geopandas = "0.13.2"
+matplotlib = "3.7.3"
+pyarrow = "13.0.0"
+s3fs = "2023.9.0"
+shapely = "2.0.1"
+rtree = "1.0.1"
+numpy = "1.26.0"
+ipykernel = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.7"
