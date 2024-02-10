@@ -164,6 +164,8 @@ If using R, the [ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR) pa
 
 [Using Python to analyze download speeds in Kentucky counties](tutorials/python/aggregate_by_county/aggregate_by_county_py.ipynb)
 
+[Using Python to filter tiles by centroids with parquet](tutorials/python/filter_by_centroids/centroids.ipynb)
+
 [Using R to create your own maps with Ookla Open Datasets](https://www.ookla.com/articles/best-ookla-open-data-projects-2021)
 
 [Using R to analyze download speeds in Kentucky counties](tutorials/R/aggregate_by_county/aggregate_by_county.md)
@@ -174,6 +176,10 @@ If using R, the [ooklaOpenDataR](https://github.com/teamookla/ooklaOpenDataR) pa
 
 ## License
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+## Suggested Attribution
+
+Speedtest® by Ookla® Global Fixed and Mobile Network Performance Maps was accessed on [DAY MONTH YEAR] from [AWS](https://aws.amazon.com/marketplace/pp/prodview-breawk6ljkovm#resources). Based on [LICENSEE’S] analysis of Speedtest® by Ookla® Global Fixed and Mobile Network Performance Maps for [DATA TIME PERIOD]. Ookla trademarks used under license and reprinted with permission.
 
 ## Change Log
 
