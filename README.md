@@ -131,7 +131,7 @@ Apache Parquet:
 
 S3 objects can also be downloaded via the AWS CLI. See these instructions for [installing AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).  
 
-Using the object keys described above, the following bash script downloads a shapefile (`2024-01-01_performance_fixed_tiles.zip`) for fixed performance tiles aggregated over Q1 2024 using [aws s3 cp](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html).
+Using the object keys described above, the following bash script downloads a shapefile (`2024-04-01_performance_fixed_tiles.zip`) for fixed performance tiles aggregated over Q2 2024 using [aws s3 cp](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html).
 
 ```bash
 #!/usr/bin/env bash
@@ -145,13 +145,13 @@ aws s3 cp s3://ookla-open-data/${FORMAT}/performance/type=${TYPE}/year=${YYYY}/q
 ```
 
 
-To download the 2024 Q1 mobile and fixed time series datasets, we can also specify the full S3 URI to download the objects:
+To download the 2024 Q2 mobile and fixed time series datasets, we can also specify the full S3 URI to download the objects:
 
 ``` bash
 #!/usr/bin/env bash
-# Mobile 2024 Q1
+# Mobile 2024 Q2
 aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.parquet --no-sign-request
-# Fixed 2024 Q1
+# Fixed 2024 Q2
 aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.parquet --no-sign-request
 ```
 
