@@ -119,8 +119,8 @@ Files can also be downloaded directly by clicking on the following URLs:
 
 Esri Shapefiles:
 
-* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2024/quarter=2/2024-01-01_performance_mobile_tiles.zip
-* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2024/quarter=2/2024-01-01_performance_fixed_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.zip
 
 Apache Parquet:
 
