@@ -19,7 +19,7 @@ For the purposes of these layers, a zoom level of 16 (z=16) is used for the tili
 
 #### Update Cadence
 
-The tile aggregates start in Q1 2019 and go through the most recently completed quarter (Q1 2024). They will be updated shortly after the conclusion of the quarter.
+The tile aggregates start in Q1 2019 and go through the most recently completed quarter (Q2 2024). They will be updated shortly after the conclusion of the quarter.
 
 #### Tile Attributes
 Each tile contains the following adjoining attributes:
@@ -104,13 +104,13 @@ For example, to access all of the files for fixed and mobile service types for t
 
 Shapefiles:
 
-* `s3://ookla-open-data/shapefiles/performance/type=mobile/year=2024/quarter=1/2024-10-01_performance_mobile_tiles.zip`
-* `s3://ookla-open-data/shapefiles/performance/type=fixed/year=2024/quarter=2/2024-10-01_performance_fixed_tiles.zip`
+* `s3://ookla-open-data/shapefiles/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.zip`
+* `s3://ookla-open-data/shapefiles/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.zip`
 
 parquet files:
 
-* `s3://ookla-open-data/parquet/performance/type=mobile/year=2024/quarter=1/2024-01-01_performance_mobile_tiles.parquet`
-* `s3://ookla-open-data/parquet/performance/type=fixed/year=2024/quarter=1/2024-01-01_performance_fixed_tiles.parquet`
+* `s3://ookla-open-data/parquet/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.parquet`
+* `s3://ookla-open-data/parquet/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.parquet`
 
 
 ### Download via URL
@@ -119,13 +119,13 @@ Files can also be downloaded directly by clicking on the following URLs:
 
 Esri Shapefiles:
 
-* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2024/quarter=1/2024-01-01_performance_mobile_tiles.zip
-* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2024/quarter=1/2024-01-01_performance_fixed_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2024/quarter=2/2024-01-01_performance_mobile_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2024/quarter=2/2024-01-01_performance_fixed_tiles.zip
 
 Apache Parquet:
 
-* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=mobile/year=2024/quarter=1/2024-01-01_performance_mobile_tiles.parquet
-* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2024/quarter=1/2024-01-01_performance_fixed_tiles.parquet
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.parquet
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.parquet
 
 ### Download via CLI
 
@@ -150,9 +150,9 @@ To download the 2024 Q1 mobile and fixed time series datasets, we can also speci
 ``` bash
 #!/usr/bin/env bash
 # Mobile 2024 Q1
-aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2024/quarter=1/2024-01-01_performance_mobile_tiles.parquet --no-sign-request
+aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.parquet --no-sign-request
 # Fixed 2024 Q1
-aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2024/quarter=1/2024-01-01_performance_fixed_tiles.parquet --no-sign-request
+aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.parquet --no-sign-request
 ```
 
 
