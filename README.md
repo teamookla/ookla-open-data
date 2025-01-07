@@ -19,7 +19,7 @@ For the purposes of these layers, a zoom level of 16 (z=16) is used for the tili
 
 #### Update Cadence
 
-The tile aggregates start in Q1 2019 and go through the most recently completed quarter (Q2 2024). They will be updated shortly after the conclusion of the quarter.
+The tile aggregates start in Q1 2019 and go through the most recently completed quarter (Q4 2024). They will be updated shortly after the conclusion of the quarter.
 
 #### Tile Attributes
 Each tile contains the following adjoining attributes:
@@ -100,17 +100,17 @@ Individual downloads for fixed or mobile network performance aggregates (map til
 
 s3://ookla-open-data/**FORMAT**/performance/type=**TYPE**/year=**YYYY**/quarter=**Q**/**FILENAME**
 
-For example, to access all of the files for fixed and mobile service types for the fist quarter of the year 2024, one would use the following S3 URIs:
+For example, to access all of the files for fixed and mobile service types for the fourth quarter of the year 2024, one would use the following S3 URIs:
 
 Shapefiles:
 
-* `s3://ookla-open-data/shapefiles/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.zip`
-* `s3://ookla-open-data/shapefiles/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.zip`
+* `s3://ookla-open-data/shapefiles/performance/type=mobile/year=2024/quarter=4/2024-10-01_performance_mobile_tiles.zip`
+* `s3://ookla-open-data/shapefiles/performance/type=fixed/year=2024/quarter=4/2024-10-01_performance_fixed_tiles.zip`
 
 parquet files:
 
-* `s3://ookla-open-data/parquet/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.parquet`
-* `s3://ookla-open-data/parquet/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.parquet`
+* `s3://ookla-open-data/parquet/performance/type=mobile/year=2024/quarter=4/2024-10-01_performance_mobile_tiles.parquet`
+* `s3://ookla-open-data/parquet/performance/type=fixed/year=2024/quarter=4/2024-10-01_performance_fixed_tiles.parquet`
 
 
 ### Download via URL
@@ -119,19 +119,19 @@ Files can also be downloaded directly by clicking on the following URLs:
 
 Esri Shapefiles:
 
-* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.zip
-* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=mobile/year=2024/quarter=4/2024-10-01_performance_mobile_tiles.zip
+* https://ookla-open-data.s3.amazonaws.com/shapefiles/performance/type=fixed/year=2024/quarter=4/2024-10-01_performance_fixed_tiles.zip
 
 Apache Parquet:
 
-* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.parquet
-* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.parquet
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=mobile/year=2024/quarter=4/2024-10-01_performance_mobile_tiles.parquet
+* https://ookla-open-data.s3.amazonaws.com/parquet/performance/type=fixed/year=2024/quarter=4/2024-10-01_performance_fixed_tiles.parquet
 
 ### Download via CLI
 
 S3 objects can also be downloaded via the AWS CLI. See these instructions for [installing AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).  
 
-Using the object keys described above, the following bash script downloads a shapefile (`2024-04-01_performance_fixed_tiles.zip`) for fixed performance tiles aggregated over Q2 2024 using [aws s3 cp](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html).
+Using the object keys described above, the following bash script downloads a shapefile (`2024-10-01_performance_fixed_tiles.zip`) for fixed performance tiles aggregated over Q4 2024 using [aws s3 cp](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html).
 
 ```bash
 #!/usr/bin/env bash
@@ -145,14 +145,14 @@ aws s3 cp s3://ookla-open-data/${FORMAT}/performance/type=${TYPE}/year=${YYYY}/q
 ```
 
 
-To download the 2024 Q2 mobile and fixed time series datasets, we can also specify the full S3 URI to download the objects:
+To download the 2024 Q4 mobile and fixed time series datasets, we can also specify the full S3 URI to download the objects:
 
 ``` bash
 #!/usr/bin/env bash
-# Mobile 2024 Q2
-aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2024/quarter=2/2024-04-01_performance_mobile_tiles.parquet --no-sign-request
-# Fixed 2024 Q2
-aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2024/quarter=2/2024-04-01_performance_fixed_tiles.parquet --no-sign-request
+# Mobile 2024 Q4
+aws s3 cp s3://ookla-open-data/parquet/performance/type=mobile/year=2024/quarter=4/2024-10-01_performance_mobile_tiles.parquet --no-sign-request
+# Fixed 2024 Q4
+aws s3 cp s3://ookla-open-data/parquet/performance/type=fixed/year=2024/quarter=4/2024-10-01_performance_fixed_tiles.parquet --no-sign-request
 ```
 
 
