@@ -19,7 +19,7 @@ For the purposes of these layers, a zoom level of 16 (z=16) is used for the tili
 
 #### Update Cadence
 
-The tile aggregates start in Q1 2019 and go through the most recently completed quarter (Q4 2024). They will be updated shortly after the conclusion of the quarter.
+The tile aggregates start in Q1 2019 and go through the most recently completed quarter (Q1 2025). They will be updated shortly after the conclusion of the quarter.
 
 #### Tile Attributes
 Each tile contains the following adjoining attributes:
@@ -137,7 +137,7 @@ Using the object keys described above, the following bash script downloads a sha
 #!/usr/bin/env bash
 export FORMAT='shapefiles' # (shapefiles|parquet)
 export TYPE='fixed'        # (fixed|mobile)
-export YYYY='2024'         # 2019,2020,2021,2022,2023,2024
+export YYYY='2024'         # 2019,2020,2021,2022,2023,2024,2025
 export Q='1'               # 1,2,3,4 (to date)
 aws s3 cp s3://ookla-open-data/${FORMAT}/performance/type=${TYPE}/year=${YYYY}/quarter=${Q}/ . \
 --recursive \
