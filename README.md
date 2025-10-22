@@ -19,7 +19,7 @@ For the purposes of these layers, a zoom level of 16 (z=16) is used for the tili
 
 #### Update Cadence
 
-The tile aggregates start in Q1 2019 and go through the most recently completed quarter (Q2 2025). They will be updated shortly after the conclusion of the quarter.
+The tile aggregates start in Q1 2019 and go through the most recently completed quarter **(Q3 2025)**. They will be updated shortly after the conclusion of the quarter.
 
 #### Tile Attributes
 Each tile contains the following adjoining attributes:
