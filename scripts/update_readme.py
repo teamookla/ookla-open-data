@@ -28,16 +28,16 @@ def update_readme(path: str = "README.md") -> bool:
 
     updated, count = re.subn(r"\*\*\(Q\d \d{4}\)\*\*", new_quarter, content)
     if count == 0:
-        print("No quarter pattern found in README.md")
+        print(f"No quarter pattern found in {path}")
         return False
 
     if updated == content:
-        print(f"README already shows {new_quarter}, no update needed.")
+        print(f"{path} already shows {new_quarter}, no update needed.")
         return False
 
     with open(path, "w") as f:
         f.write(updated)
-    print(f"Updated README to {new_quarter}")
+    print(f"Updated {path} to {new_quarter}")
     return True
 
 

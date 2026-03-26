@@ -46,7 +46,8 @@ def test_update_readme_changes_quarter(monkeypatch):
                             lambda: (1, 2026))
         result = update_readme(path)
         assert result is True
-        assert "**(Q1 2026)**" in open(path).read()
+        with open(path) as f:
+            assert "**(Q1 2026)**" in f.read()
     finally:
         os.unlink(path)
 
@@ -59,7 +60,8 @@ def test_update_readme_already_current(monkeypatch):
                             lambda: (1, 2026))
         result = update_readme(path)
         assert result is False
-        assert "**(Q1 2026)**" in open(path).read()
+        with open(path) as f:
+            assert "**(Q1 2026)**" in f.read()
     finally:
         os.unlink(path)
 
@@ -82,7 +84,8 @@ def test_update_readme_does_not_touch_other_quarters():
     path = make_temp_readme(content)
     try:
         result = update_readme(path)
-        updated = open(path).read()
+        with open(path) as f:
+            updated = f.read()
         assert "Q4 2022" in updated
         assert "Q3 2023" in updated
     finally:
