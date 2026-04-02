@@ -1,0 +1,16 @@
+[project]
+name = "ookla-open-data"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.2",
+]
