@@ -7,6 +7,9 @@ requires-python = ">=3.12"
 dependencies = [
 ]
 
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
 [project.optional-dependencies]
 dev = [
     "pytest>=9.0.2",
