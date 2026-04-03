@@ -4,7 +4,3 @@
 .DS_Store
 .ipynb_checkpoints
 .Rhistory
-__pycache__/
-*.py[cod]
-*.pyo
-.pytest_cache/
