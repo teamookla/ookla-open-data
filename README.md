@@ -19,7 +19,7 @@ For the purposes of these layers, a zoom level of 16 (z=16) is used for the tili
 
 #### Update Cadence
 
-The tile aggregates start in Q1 2019 and go through the most recently completed quarter **(Q4 2025)**. They will be updated shortly after the conclusion of the quarter.
+The tile aggregates start in Q1 2019 and go through the most recently completed quarter **(Q1 2026)**. They will be updated shortly after the conclusion of the quarter.
 
 #### Tile Attributes
 Each tile contains the following adjoining attributes:
@@ -137,7 +137,7 @@ Using the object keys described above, the following bash script downloads a sha
 #!/usr/bin/env bash
 export FORMAT='shapefiles' # (shapefiles|parquet)
 export TYPE='fixed'        # (fixed|mobile)
-export YYYY='2024'         # 2019,2020,2021,2022,2023,2024,2025
+export YYYY='2024'         # 2019,2020,2021,2022,2023,2024,2025,2026
 export Q='1'               # 1,2,3,4 (to date)
 aws s3 cp s3://ookla-open-data/${FORMAT}/performance/type=${TYPE}/year=${YYYY}/quarter=${Q}/ . \
 --recursive \
@@ -185,4 +185,6 @@ Speedtest® by Ookla® Global Fixed and Mobile Network Performance Maps was acce
 
 * **2023-02-23** Loaded latency values added as `avg_lat_down_ms` and `avg_lat_up_ms`. [Loaded latency](https://www.ookla.com/articles/introducing-loaded-latency#:~:text=The%20loaded%20latency%20test%20measures,it%20is%20not%20in%20use.) measures how network load impacts network responsiveness, or latency. These values are only available in Parquet format.
 
-* **2023-07-01** Centroid coordinate values for tiles added as `tile_x` and `tile_y`. 
+* **2023-07-01** Centroid coordinate values for tiles added as `tile_x` and `tile_y`.
+
+* **2026-04-16** As part of our standard review process, supported regions have been updated. Users may notice that certain geographic areas are no longer available in the current data set. Regional availability is subject to change based on applicable laws and internal policies.
